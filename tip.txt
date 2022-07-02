@@ -1,0 +1,62 @@
+로컬 서버 실행 :bundle exec jekyll s
+로컬 호스트 : http://127.0.0.1:4000
+
+
+마크 다운 작성 요령
+
+0. 포스트 설정
+---
+layout: post
+title: An exhibit of Markdown
+subtitle: Each post also has a subtitle
+categories: markdown
+tags: [example, markdown]
+---
+
+1. `_posts` : 경로, 파일명
+
+2.
+ ## section : 부제목
+  # section : 제목
+
+3. 링크
+Check out the [Jekyll docs][jekyll-docs] , [Jekyll’s GitHub repo][jekyll-gh],  [Jekyll Talk][jekyll-talk].
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
+
+4. 코드 블럭
+```python (or java)
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person("John", 36)
+
+print(p1.name)
+print(p1.age)
+```
+
+
+5. 이미지 경로
+![Crepe](https://s3-media3.fl.yelpcdn.com/bphoto/cQ1Yoa75m2yUFFbY2xwuqw/348s.jpg)
+
+or
+
+<figure style="width: 100%">
+  <img src="https://enidanny.github.io//assets/images/2020-01-07-bellagio.png" alt="">
+</figure>
+
+6. 리스트
+* An item
+* Another item
+* Yet another item
+* And there's more...
+
+7. 인용
+> 이재훈
+
+8. 수평선
+---
