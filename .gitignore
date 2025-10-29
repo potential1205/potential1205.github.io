@@ -1,0 +1,27 @@
+# macOS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Hugo 빌드 캐시 & 잠금
+resources/_gen/
+.hugo_build.lock
+hugo_stats.json
+
+# 빌드 산출물(정적 배포 리포지터리/브랜치에서만 관리)
+public/
+
+# Node/SCSS(사용하는 경우)
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+.sass-cache/
+
+# 환경 변수 / 로컬 설정(있다면)
+.env
+.env.*
+*.local
+
+# OS/기타
+Thumbs.db
