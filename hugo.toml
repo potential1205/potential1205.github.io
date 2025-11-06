@@ -1,4 +1,4 @@
-baseURL = "https://potentialee.github.io/"
+baseURL = "https://potential1205.github.io/"
 languageCode = "ko-kr"
 title = "파브르의 개발 블로그"
 theme = "hugo-PaperMod-master"
@@ -38,7 +38,7 @@ DateFormat = "2006. 01. 02 15:04"
 [params.comments]
 enabled = true
 provider = "utterances"
-repo = "potentialee/potentialee.github.io"
+repo = "potential1205/potential1205.github.io"
 issueTerm = "pathname"
 label = "comment"
 theme = "preferred-color-scheme"
