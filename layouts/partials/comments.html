@@ -1,0 +1,21 @@
+{{- $comments := site.Params.comments -}}
+{{- $pageSetting := .Params.comments -}}
+{{- $enabled := false -}}
+{{- if eq (printf "%T" $pageSetting) "bool" -}}
+  {{- $enabled = $pageSetting -}}
+{{- else -}}
+  {{- $enabled = $comments.enabled | default false -}}
+{{- end -}}
+
+{{- if and $enabled (eq ($comments.provider | default "") "utterances") -}}
+<section id="comments" class="post-comments" aria-label="댓글">
+  <script src="https://utteranc.es/client.js"
+          repo="{{ $comments.repo }}"
+          issue-term="{{ $comments.issueTerm | default "pathname" }}"
+          label="{{ $comments.label | default "comment" }}"
+          theme="{{ $comments.theme | default "preferred-color-scheme" }}"
+          crossorigin="anonymous"
+          async>
+  </script>
+</section>
+{{- end -}}

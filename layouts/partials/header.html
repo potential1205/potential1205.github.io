@@ -1,0 +1,151 @@
+<header class="header site-header">
+  {{- $currentPage := . -}}
+  {{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+  {{- $brandTarget := site.Home -}}
+  {{- $searchTarget := site.Home -}}
+  {{- if gt (len $mainSections) 0 -}}
+    {{- with site.GetPage (printf "/%s" (index $mainSections 0)) -}}
+      {{- $searchTarget = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with site.GetPage "/" -}}
+    {{- $brandTarget = . -}}
+  {{- end -}}
+  {{- $brandURL := cond (ne $brandTarget nil) $brandTarget.RelPermalink (site.Home.RelPermalink) -}}
+  {{- $searchURL := cond (ne $searchTarget nil) $searchTarget.RelPermalink (site.Home.RelPermalink) -}}
+  <nav class="header__nav">
+    <div class="header__left">
+      {{- $label_text := (site.Params.label.text | default site.Title) -}}
+      {{- $avatarPath := site.Params.profileImage | default site.Params.label.icon -}}
+      {{- $avatarSVG := site.Params.label.iconSVG -}}
+      {{- if site.Title -}}
+      <a class="header__brand-link" href="{{ $brandURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)">
+        {{- if or $avatarPath $avatarSVG -}}
+        <span class="header__brand-avatar">
+          {{- if $avatarPath -}}
+            {{- $res := resources.Get $avatarPath -}}
+            {{- if $res -}}
+              {{- $processable := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
+              {{- if hugo.IsExtended -}}
+                {{- $processable = $processable | append "webp" -}}
+              {{- end -}}
+              {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) -}}
+              {{- if and (in $processable $res.MediaType.SubType) (eq $prod true) -}}
+                {{- $height := site.Params.label.iconHeight | default 60 -}}
+                {{- $res = $res.Resize (printf "x%d" $height) -}}
+              {{- end -}}
+              <img src="{{ $res.Permalink }}" alt="{{ $label_text }}" loading="lazy">
+            {{- else -}}
+              <img src="{{ $avatarPath | absURL }}" alt="{{ $label_text }}" loading="lazy">
+            {{- end -}}
+          {{- else -}}
+            <span class="header__brand-avatar-svg">{{ $avatarSVG | safeHTML }}</span>
+          {{- end -}}
+        </span>
+        {{- end -}}
+        <span class="header__brand-text">{{- $label_text -}}</span>
+      </a>
+      {{- end -}}
+    </div>
+
+    <div class="header__center">
+      <form class="header-search" action="{{ $searchURL }}" method="get" role="search">
+        <label class="sr-only" for="header-search">{{ i18n "search" | default "Search" }}</label>
+        <input id="header-search" type="search" name="q" placeholder="{{ site.Params.headerSearchPlaceholder | default "검색" }}" aria-label="{{ i18n "search" | default "Search" }}">
+        <button type="submit" class="header-search__submit" aria-label="{{ i18n "search" | default "Search" }}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="header__right">
+      {{- with site.Params.social.github -}}
+      <a class="header__icon" href="{{ . }}" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58l-.02-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.9 0-1.3.46-2.36 1.22-3.19-.12-.3-.53-1.5.12-3.13 0 0 1-.32 3.3 1.22a11.5 11.5 0 0 1 6 0c2.3-1.54 3.29-1.22 3.29-1.22.66 1.63.25 2.83.12 3.13.76.83 1.21 1.89 1.21 3.2 0 4.59-2.8 5.59-5.48 5.88.43.37.81 1.1.81 2.22l-.01 3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .5Z"/>
+        </svg>
+      </a>
+      {{- end -}}
+      {{- with site.Params.social.linkedin -}}
+      <a class="header__icon" href="{{ . }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 8.98h3.96V21H3V8.98Zm7.03 0H14v1.64h.05c.42-.8 1.45-1.64 2.98-1.64 3.19 0 3.78 2.1 3.78 4.84V21h-3.96v-5.22c0-1.24-.02-2.84-1.73-2.84-1.73 0-1.99 1.35-1.99 2.75V21H10V8.98Z"/>
+        </svg>
+      </a>
+      {{- end -}}
+      {{- with site.Home.OutputFormats.Get "RSS" -}}
+      <a class="header__icon header__icon--rss" href="{{ .RelPermalink }}" aria-label="RSS feed" title="RSS">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM2 4.5v3a14.5 14.5 0 0 1 14.5 14.5h3C19.5 12.58 11.42 4.5 2 4.5Zm0 6v3a8.5 8.5 0 0 1 8.5 8.5h3C13.5 14.49 8.01 9 2 10.5Z"/>
+        </svg>
+      </a>
+      {{- end -}}
+      {{- if (not site.Params.disableThemeToggle) -}}
+      <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+        <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+      {{- end -}}
+      {{- if (not site.Params.disableLangToggle) -}}
+        {{- $lang := .Lang -}}
+        {{- with site.Home.Translations -}}
+        <ul class="lang-switch">
+          {{- range . -}}
+            {{- if ne $lang .Lang -}}
+            <li>
+              <a href="{{- .Permalink -}}" title="{{ .Language.Params.languageAltTitle | default (.Language.LanguageName | emojify) | default (.Lang | title) }}" aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
+                {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) -}}
+                {{- .Language.LanguageName | emojify -}}
+                {{- else -}}
+                {{- .Lang | title -}}
+                {{- end -}}
+              </a>
+            </li>
+            {{- end -}}
+          {{- end -}}
+        </ul>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  </nav>
+
+  {{- with site.Menus -}}
+    {{- with index . "main" -}}
+    <nav class="header__menu">
+      <ul>
+        {{- range . -}}
+          {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL -}}
+          {{- $page_url := $currentPage.Permalink | absLangURL -}}
+          <li>
+            <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+              <span class="{{ if eq $menu_item_url $page_url }}active{{ end }}">{{- .Pre }}{{- .Name -}}{{ .Post -}}</span>
+              {{- if (findRE "://" .URL) -}}&nbsp;
+              <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14L21 3"></path>
+              </svg>
+              {{- end -}}
+            </a>
+          </li>
+        {{- end -}}
+      </ul>
+    </nav>
+    {{- end -}}
+  {{- end -}}
+</header>

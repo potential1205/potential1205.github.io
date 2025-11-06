@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Index on 이재훈의 개발 블로그</title>
+    <link>http://localhost:1313/tags/index/</link>
+    <description>Recent content in Index on 이재훈의 개발 블로그</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 15 Mar 2024 09:20:00 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Database Indexing 가이드</title>
+      <link>http://localhost:1313/posts/database-indexing-guide/</link>
+      <pubDate>Fri, 15 Mar 2024 09:20:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/database-indexing-guide/</guid>
+      <description>쿼리 최적화를 위한 인덱스 설계 원칙2</description>
+    </item>
+  </channel>
+</rss>

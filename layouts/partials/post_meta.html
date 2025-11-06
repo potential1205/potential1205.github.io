@@ -1,0 +1,26 @@
+{{- $scratch := newScratch }}
+
+{{- with .Params.categories -}}
+  {{- $catLinks := slice -}}
+  {{- range . -}}
+    {{- $catURL := relLangURL (printf "categories/%s/" (urlize .)) -}}
+    {{- $catLinks = $catLinks | append (printf "<a class=\"meta-category\" href=\"%s\">%s</a>" $catURL .) -}}
+  {{- end -}}
+  {{- if gt (len $catLinks) 0 -}}
+    {{- $scratch.Add "meta" (slice (printf "<span class=\"meta-categories\">%s</span>" (delimit $catLinks ""))) }}
+  {{- end -}}
+{{- end -}}
+
+{{- if not .Date.IsZero -}}
+  {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+{{- end }}
+
+{{- if not (.Param "hideAuthor") -}}
+  {{- with (partial "author.html" .) }}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" .)) }}
+  {{- end }}
+{{- end }}
+
+{{- with ($scratch.Get "meta") }}
+  {{- delimit . "&nbsp;&nbsp;&nbsp;&nbsp;" | safeHTML -}}
+{{- end -}}

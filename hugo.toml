@@ -1,0 +1,59 @@
+baseURL = "https://potentialee.github.io/"
+languageCode = "ko-kr"
+title = "파브르의 개발 블로그"
+theme = "hugo-PaperMod-master"
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableGitInfo = true
+
+[taxonomies]
+category = "categories"
+tag      = "tags"
+series   = "series"
+
+[pagination]
+pagerSize = 5
+
+[minify]
+disableXML = true
+minifyOutput = true
+
+[permalinks]
+posts = "/posts/:year/:slug/"
+
+[params]
+defaultTheme = "auto"   # 다크/라이트 자동
+ShowReadingTime = false
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowToc = true
+disableSpecial1stPost = true
+headerSearchPlaceholder = "검색"
+profileImage = "profile-img.png"
+DateFormat = "2006. 01. 02 15:04"
+
+[params.comments]
+enabled = true
+provider = "utterances"
+repo = "potentialee/potentialee.github.io"
+issueTerm = "pathname"
+label = "comment"
+theme = "preferred-color-scheme"
+
+[params.social]
+github = "https://github.com/potential1205"
+linkedin = "https://www.linkedin.com"
+
+[params.assets]
+customCSS = [
+    "https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap",
+    "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+]
+
+[markup]
+[markup.highlight]
+#lineNos = true          # 줄번호 표시
+noClasses = false       # CSS 클래스로 스타일 적용

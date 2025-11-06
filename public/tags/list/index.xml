@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>List on 이재훈의 개발 블로그</title>
+    <link>http://localhost:1313/tags/list/</link>
+    <description>Recent content in List on 이재훈의 개발 블로그</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Thu, 14 Mar 2024 09:10:00 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/list/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java Collections Guide</title>
+      <link>http://localhost:1313/posts/java-collections-guide/</link>
+      <pubDate>Thu, 14 Mar 2024 09:10:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/java-collections-guide/</guid>
+      <description>List, Set, Map 사용 패턴 정리</description>
+    </item>
+  </channel>
+</rss>

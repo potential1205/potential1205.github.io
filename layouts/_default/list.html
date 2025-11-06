@@ -1,0 +1,223 @@
+{{- define "main" }}
+
+{{- if (and site.Params.profileMode.enabled .IsHome) }}
+{{- partial "index_profile.html" . }}
+{{- else }}
+
+{{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+{{- $sectionPage := site.Home -}}
+{{- if gt (len $mainSections) 0 -}}
+  {{- with site.GetPage (printf "/%s" (index $mainSections 0)) -}}
+    {{- $sectionPage = . -}}
+  {{- end -}}
+{{- end -}}
+{{- $allPages := where site.RegularPages "Section" "in" $mainSections -}}
+{{- $categoryMap := site.Taxonomies.categories -}} {{/* legacy, kept for backward compatibility */}}
+
+{{- if not .IsHome | and .Title }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{- $headerTitle := .Title -}}
+    {{- if and (eq .Kind "section") (in $mainSections .Section) -}}
+      {{- $headerTitle = printf "전체보기 (%d)" (len $allPages) -}}
+    {{- else if eq .Kind "term" -}}
+      {{- $headerTitle = printf "%s (%d)" .Title (len .Pages) -}}
+    {{- end -}}
+    {{ $headerTitle }}
+    {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+{{/* 태그 요약은 추후 UX 개선 시 다시 노출 */}}
+
+<p id="post-search-empty" class="post-search__empty" hidden></p>
+
+{{- $pages := union .RegularPages .Sections }}
+
+{{- if .IsHome }}
+  {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
+  {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+{{- end }}
+
+{{- $paginator := .Paginate $pages }}
+
+{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
+  {{- partial "home_info.html" . }}
+{{- end }}
+
+{{- $term := .Data.Term }}
+<div id="post-list">
+{{- range $index, $page := $paginator.Pages }}
+  {{- $class := "post-entry" }}
+  {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
+  {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
+    {{- $class = "first-entry" }}
+  {{- else if $term }}
+    {{- $class = "post-entry tag-entry" }}
+  {{- end }}
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  {{- $hasCover := and (not $isHidden) (or .Params.cover.image .Params.cover.thumbnail) -}}
+  {{- $searchText := printf "%s %s %s" .Title (.Summary | plainify) (.Plain | plainify) -}}
+  <article class="{{ $class }}{{ if $hasCover }} has-cover{{ end }}" data-search="{{ $searchText | plainify | replaceRE `\s+` " " | htmlEscape }}">
+    <div class="post-entry__inner">
+      <header class="entry-header">
+        <h2 class="entry-hint-parent">
+          {{- .Title }}
+          {{- if .Draft }}
+          <span class="entry-hint" title="Draft">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+              <path
+                d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+            </svg>
+          </span>
+          {{- end }}
+        </h2>
+      </header>
+      {{- if (ne (.Param "hideSummary") true) }}
+      <div class="entry-content">
+        {{- with .Description -}}
+        <p>{{ . | plainify | htmlUnescape }}</p>
+        {{- else -}}
+        <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+        {{- end -}}
+      </div>
+      {{- end }}
+      {{- if not (.Param "hideMeta") }}
+      <footer class="entry-footer">
+        {{- partial "post_meta.html" . -}}
+      </footer>
+      {{- end }}
+    </div>
+  {{- if not $isHidden -}}
+      {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) -}}
+  {{- end -}}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+</div>
+
+<script>
+(function(){
+  var list = document.getElementById('post-list');
+  if (!list) return;
+
+  var cards = Array.prototype.slice.call(list.querySelectorAll('.post-entry'));
+  var pagination = document.querySelector('.page-footer');
+  var emptyMessage = document.getElementById('post-search-empty');
+  var headerInput = document.getElementById('header-search');
+  var headerTitle = document.querySelector('.page-header h1');
+  var originalHeader = headerTitle ? headerTitle.textContent : '';
+
+  function normalize(text) {
+    return text ? text.toString().toLowerCase() : '';
+  }
+
+  function escapeText(str) {
+    return (str || '').replace(/[&<>"']/g, function(ch) {
+      return ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]);
+    });
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var rawQuery = (params.get('q') || '').trim();
+  if (headerInput) headerInput.value = rawQuery;
+
+  if (!rawQuery) {
+    cards.forEach(function(card){
+      card.hidden = false;
+      card.style.display = '';
+    });
+    if (emptyMessage) emptyMessage.hidden = true;
+    if (pagination) pagination.hidden = false;
+    if (headerTitle && originalHeader) headerTitle.textContent = originalHeader;
+    return;
+  }
+
+  var query = normalize(rawQuery);
+  var matches = 0;
+
+  cards.forEach(function(card){
+    var text = normalize(card.getAttribute('data-search') || '');
+    if (text.indexOf(query) !== -1) {
+      card.hidden = false;
+      card.style.display = '';
+      matches++;
+    } else {
+      card.hidden = true;
+      card.style.display = 'none';
+    }
+  });
+
+  if (pagination) pagination.hidden = true;
+  var displayQuery = '“' + rawQuery + '”';
+  if (headerTitle) headerTitle.textContent = displayQuery + ' (' + matches + '건)';
+
+  if (!emptyMessage) return;
+  if (matches === 0) {
+    emptyMessage.hidden = false;
+    emptyMessage.innerHTML = '검색 결과가 없습니다: “' + escapeText(rawQuery) + '”';
+  } else {
+    emptyMessage.hidden = true;
+  }
+})();
+</script>
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination" aria-label="Pagination">
+    {{- if gt $paginator.PageNumber 1 -}}
+      <a class="first" href="{{ $paginator.First.URL | absURL }}">« {{ i18n "first" | default "First" }}</a>
+      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">‹ {{ i18n "prev_page" | default "Prev" }}</a>
+    {{- else -}}
+      <span class="first is-disabled">« {{ i18n "first" | default "First" }}</span>
+      <span class="prev is-disabled">‹ {{ i18n "prev_page" | default "Prev" }}</span>
+    {{- end -}}
+
+    {{- range $index, $pager := $paginator.Pagers -}}
+      {{- $pageNum := add $index 1 -}}
+      {{- if eq $pager.PageNumber $paginator.PageNumber -}}
+        <span class="page-number is-active" aria-current="page">{{ $pageNum }}</span>
+      {{- else -}}
+        <a class="page-number" href="{{ $pager.URL | absURL }}">{{ $pageNum }}</a>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if lt $paginator.PageNumber $paginator.TotalPages -}}
+      <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" | default "Next" }} ›</a>
+      <a class="last" href="{{ $paginator.Last.URL | absURL }}">{{ i18n "last" | default "Last" }} »</a>
+    {{- else -}}
+      <span class="next is-disabled">{{ i18n "next_page" | default "Next" }} ›</span>
+      <span class="last is-disabled">{{ i18n "last" | default "Last" }} »</span>
+    {{- end -}}
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}
+
+{{- end }}
