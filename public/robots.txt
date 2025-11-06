@@ -1,3 +1,3 @@
 User-agent: *
-Disallow:
-Sitemap: https://potential1205.github.io/sitemap.xml
+Disallow: /
+Sitemap: http://localhost:49699/sitemap.xml
