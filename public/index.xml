@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>파브르의 개발 블로그</title>
-    <link>http://localhost:49699/</link>
+    <link>https://potential1205.github.io/</link>
     <description>Recent content on 파브르의 개발 블로그</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>ko-kr</language>
     <lastBuildDate>Fri, 07 Nov 2025 00:03:49 +0900</lastBuildDate>
-    <atom:link href="http://localhost:49699/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://potential1205.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java는 어떻게 실행될까 — JVM과 메모리의 동작원리</title>
-      <link>http://localhost:49699/posts/2025/java-memory-structure-deep-dive/</link>
+      <link>https://potential1205.github.io/posts/2025/java-memory-structure-deep-dive/</link>
       <pubDate>Sun, 02 Nov 2025 21:09:00 +0900</pubDate>
-      <guid>http://localhost:49699/posts/2025/java-memory-structure-deep-dive/</guid>
+      <guid>https://potential1205.github.io/posts/2025/java-memory-structure-deep-dive/</guid>
       <description>등장 배경부터 메모리 구조, 가비지 컬렉션까지 종합적으로 살펴보자</description>
     </item>
   </channel>
