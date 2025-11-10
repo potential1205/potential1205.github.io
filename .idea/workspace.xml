@@ -4,24 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52e198b-b7ea-4497-bdfb-b4640d43944c" name="Changes" comment="chore: edit linkedin url">
-      <change afterPath="$PROJECT_DIR$/static/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/java/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/java/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/java/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/java/index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/java/page/1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/java/page/1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/page/1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/page/1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/posts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/posts/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/posts/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/posts/index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/posts/page/1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/posts/page/1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/index.xml" afterDir="false" />
+    <list default="true" id="e52e198b-b7ea-4497-bdfb-b4640d43944c" name="Changes" comment="chore: edit favicon">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/stylesheet.c31c0e7e258d5593e38bca7db9ed33c602cd2e67d10b92f41bdd40da14816754.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/database/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/database/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/database/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/java/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/java/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/categories/java/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/posts/database-indexing-guide/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/posts/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/posts/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/posts/java-collections-guide/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/posts/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/posts/profile-img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/profile-img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sitemap.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/collections/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/collections/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/collections/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/index/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/index/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/index/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/list/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/list/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/list/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/map/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/map/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/map/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/performance/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/performance/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/performance/page/1/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/query/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/query/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tags/query/page/1/index.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762738374407</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="chore: edit favicon">
+      <option name="closed" value="true" />
+      <created>1762739036897</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1762739036897</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -162,6 +196,7 @@
     <MESSAGE value="chore: edit base-url" />
     <MESSAGE value="chore: set github-actions" />
     <MESSAGE value="chore: edit linkedin url" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: edit linkedin url" />
+    <MESSAGE value="chore: edit favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: edit favicon" />
   </component>
 </project>
